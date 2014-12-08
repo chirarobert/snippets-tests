@@ -67,7 +67,8 @@ class TestSnippets:
         snippet_links = soup.select("a")
 
         for link in snippet_links:
-            self.assert_valid_url(link['href'], path)
+            if "about:" not in link['href']:
+                self.assert_valid_url(link['href'], path)
 
     @pytest.mark.parametrize(('path'), test_data)
     def test_that_snippets_are_well_formed_xml(self, mozwebqa, path):
